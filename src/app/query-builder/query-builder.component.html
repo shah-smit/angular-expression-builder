@@ -7,14 +7,14 @@
                 class="glyphicon glyphicon-plus-sign"></span> Add Condition</button>
         <button style="margin-left: 5px" (click)="addGroup()" class="btn btn-sm btn-success"><span
                 class="glyphicon glyphicon-plus-sign"></span> Add Group</button>
-        <button style="margin-left: 5px" (click)="removeGroup()" class="btn btn-sm btn-danger"><span
+        <button style="margin-left: 5px" (click)="removeGroup(group)" class="btn btn-sm btn-danger"><span
                 class="glyphicon glyphicon-minus-sign"></span> Remove Group</button>
     </div>
     <div class="group-conditions">
         <div *ngFor="let rule of group.rules; index as i" class="condition">
             <div [ngSwitch]="rule.hasOwnProperty('group')">
                 <div *ngSwitchCase="true">
-                    <query-builder [group]="rule.group" [index]="i" (queryChanged)="onQueryChanged(rule.group)"></query-builder>
+                    <query-builder [group]="rule.group" [index]="i" (queryChanged)="onQueryChanged(rule.group)" (groupRemoved)="onGroupRemoved(rule.group)"></query-builder>
                 </div>
                 <div *ngSwitchDefault>
                     <div class="input-group">

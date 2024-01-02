@@ -40,6 +40,7 @@ export class QueryBuilderComponent {
     name: '>='
   }];
   @Output() queryChanged = new EventEmitter<Group>();
+  @Output() groupRemoved = new EventEmitter<Group>();
 
   constructor(private queryService: QueryService) {
 
@@ -67,21 +68,9 @@ export class QueryBuilderComponent {
     this.queryChanged.emit(this.group);
   }
 
-  removeGroup() {
-    const parent = this.group.parent;
-    console.log(parent)
-    console.log(this.index)
-    if (parent) {
-      const updated_parent_rules = parent.rules.filter(rule => {
-        if(rule.group && rule.group.index == this.index){
-          return false;
-        };
-        return true;
-      })
-      parent.rules = updated_parent_rules  
-    }
-
-    this.queryChanged.emit(parent);
+  removeGroup(group: Group) {
+    console.log("group trying to remove...",group.index)
+    this.groupRemoved.emit(group)
   }
 
   removeCondition(rule: Rule) {
@@ -97,5 +86,31 @@ export class QueryBuilderComponent {
 
   onQueryChanged(group: Group) {
     this.queryChanged.emit(group)
+  }
+
+  onGroupRemoved(group: Group) {
+    console.log("group trying to remove...",group.index)
+    const parent = group.parent;
+    console.log(parent)
+    console.log(parent?.index)
+    if (parent) {
+      const updated_parent_rules = parent.rules.filter(rule => {
+        if(rule.group && rule.group.index == group.index){
+          return false;
+        };
+        return true;
+      })
+      parent.rules = updated_parent_rules  
+    } else {
+      const updated_parent_rules = group.rules.filter(rule => {
+        if(rule.group && rule.group.index == group.index){
+          return false;
+        };
+        return true;
+      })
+      this.group.rules = updated_parent_rules 
+    }
+
+    this.queryChanged.emit(parent);
   }
 }
