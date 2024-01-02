@@ -1,0 +1,36 @@
+<div class="alert alert-warning alert-group">
+    <div class="input-group">
+        <select [(ngModel)]="group.operator" class="form-control input-sm">
+            <option *ngFor="let o of operators" [value]="o.name">{{ o.name }}</option>
+        </select>
+        <button style="margin-left: 5px" (click)="addCondition()" class="btn btn-sm btn-success"><span
+                class="glyphicon glyphicon-plus-sign"></span> Add Condition</button>
+        <button style="margin-left: 5px" (click)="addGroup()" class="btn btn-sm btn-success"><span
+                class="glyphicon glyphicon-plus-sign"></span> Add Group</button>
+        <button style="margin-left: 5px" (click)="removeGroup()" class="btn btn-sm btn-danger"><span
+                class="glyphicon glyphicon-minus-sign"></span> Remove Group</button>
+    </div>
+    <div class="group-conditions">
+        <div *ngFor="let rule of group.rules" class="condition">
+            <div [ngSwitch]="rule.hasOwnProperty('group')">
+                <div *ngSwitchCase="true">
+                    <query-builder [group]="rule.group"></query-builder>
+                </div>
+                <div *ngSwitchDefault>
+                    <div class="input-group">
+                        <select [(ngModel)]="rule.field" class="form-control input-sm">
+                            <option *ngFor="let t of fields" [value]="t.name">{{ t.name }}</option>
+                        </select>
+                        <select style="margin-left: 5px" [(ngModel)]="rule.condition" class="form-control input-sm">
+                            <option *ngFor="let c of conditions" [value]="c.name">{{ c.name }}</option>
+                        </select>
+                        <input style="margin-left: 5px" type="text" [(ngModel)]="rule.data"
+                            class="form-control input-sm" />
+                        <button style="margin-left: 5px" (click)="removeCondition(rule)"
+                            class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-minus-sign">Delete</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
