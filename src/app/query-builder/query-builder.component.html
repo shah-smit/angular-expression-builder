@@ -11,10 +11,10 @@
                 class="glyphicon glyphicon-minus-sign"></span> Remove Group</button>
     </div>
     <div class="group-conditions">
-        <div *ngFor="let rule of group.rules" class="condition">
+        <div *ngFor="let rule of group.rules; index as i" class="condition">
             <div [ngSwitch]="rule.hasOwnProperty('group')">
                 <div *ngSwitchCase="true">
-                    <query-builder [group]="rule.group"></query-builder>
+                    <query-builder [group]="rule.group" [index]="i" (queryChanged)="onQueryChanged(rule.group)"></query-builder>
                 </div>
                 <div *ngSwitchDefault>
                     <div class="input-group">

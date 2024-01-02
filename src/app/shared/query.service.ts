@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface Rule {
+    index?: number;
     group?: any;
     field?: string;
     condition?: string;
@@ -8,6 +9,7 @@ export interface Rule {
 }
 
 export interface Group {
+    index?: number;
     operator: string;
     rules: Rule[];
     parent?: Group;
@@ -17,6 +19,9 @@ export interface Group {
     providedIn: 'root'
 })
 export class QueryService {
+    filter: Group = { index: 0, operator: "AND", rules: [] };
+
+
     computed(group: Group) {
         if (!group) return '';
         let str = '(';

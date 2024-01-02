@@ -7,6 +7,6 @@
       <span [innerHTML]="output"></span>
     </div>
 
-    <query-builder [group]="filter.group"></query-builder>
+    <query-builder [group]="filter.group" (queryChanged)="onQueryChanged(filter.group)"></query-builder>
   </div>
 </div>

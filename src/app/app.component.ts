@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const data = '{"group": {"operator": "AND","rules": []}}';
+    const data = '{"group": { "index": 1, "operator": "AND","rules": []}}';
     this.filter = JSON.parse(data);
   }
 
