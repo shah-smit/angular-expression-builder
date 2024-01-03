@@ -89,10 +89,7 @@ export class QueryBuilderComponent {
   }
 
   onGroupRemoved(group: Group) {
-    console.log("group trying to remove...",group.index)
     const parent = group.parent;
-    console.log(parent)
-    console.log(parent?.index)
     if (parent) {
       const updated_parent_rules = parent.rules.filter(rule => {
         if(rule.group && rule.group.index == group.index){
