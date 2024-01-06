@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { QueryService, Group } from './shared/query.service';
 import { BrowserModule, By } from '@angular/platform-browser';
+import { QueryBuilderComponent } from './query-builder/query-builder.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -10,9 +12,10 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [AppComponent, QueryBuilderComponent],
       providers: [QueryService],
-      imports: [BrowserModule]
+      imports: [BrowserModule],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   });
 

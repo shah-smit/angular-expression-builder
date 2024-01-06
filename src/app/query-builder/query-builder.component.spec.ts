@@ -47,7 +47,7 @@ describe('QueryBuilderComponent', () => {
   it('should remove a group', () => {
     component.addGroup(); // Add a group to remove
     const initialRulesLength = component.group.rules.length;
-    component.removeGroup(component.group.rules[initialRulesLength - 1].group);
+    component.onGroupRemoved(component.group.rules[initialRulesLength - 1].group);
     expect(component.group.rules.length).toBe(initialRulesLength - 1);
   });
 

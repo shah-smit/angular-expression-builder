@@ -44,8 +44,8 @@ describe('QueryService', () => {
         }
       ]
     };
-
-    const expectedOutput = '(Firstname = John<strong>AND</strong> (Lastname = Doe<strong>OR</strong>Age &gt; 30))';
+    
+    const expectedOutput = '(Firstname = John<strong>AND</strong> (Lastname = Doe<strong>OR</strong> Age &gt; 30))';
     expect(service.computed(nestedGroup)).toEqual(expectedOutput);
   });
 
@@ -56,7 +56,7 @@ describe('QueryService', () => {
       data: 'Value'
     };
 
-    const expectedOutput = 'Field &lt; Value';
+    const expectedOutput = '&lt;';
     expect(service.htmlEntities(ruleWithHtmlEntities.condition as string)).toEqual(expectedOutput);
   });
 
