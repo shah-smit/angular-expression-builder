@@ -131,8 +131,6 @@ export class QueryService {
             data: item.split(operatorFound[0].name)[1].trim(),
             condition: operatorFound[0].name
         }
-
-
     }
 
 
