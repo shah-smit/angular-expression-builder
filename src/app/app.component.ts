@@ -11,12 +11,14 @@ export class AppComponent implements OnInit {
   output: string = '';
 
   constructor(private queryService: QueryService) {
-    
+
   }
 
   ngOnInit() {
-    const data = '{"group": { "index": 1, "operator": "AND","rules": []}}';
-    this.filter = JSON.parse(data);
+    const data = '( Firstname < XY AND Lastname > 10 AND ( Birthdate <= AA OR Birthdate <= BYA OR City > 10 ) AND Lastname >= SOME )';
+    console.log(data);
+    this.filter = { group: this.queryService.tokenizeExpression(data, undefined) };
+    console.log(this.filter.group)
   }
 
   onQueryChanged(group: Group) {
